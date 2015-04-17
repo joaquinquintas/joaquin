@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* CSS Document */
+.doc {
+	background-color: #F1F2F2;
+	width: 970px;
+	padding-top: 30px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	overflow: hidden;
+}
+
+.pdf {
+	width: 152px;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	float: right;
+}
+.doc-header {
+	width: 970px;
+	position: relative;
+	height: 100px;
+}
+
+.pdf-img {
+	background: url(../images/pdf.png);
+	float: left;
+	height: 54px;
+	width: 54px;
+}
+.pdf-txt {
+	float: left;
+	width: 90px;
+	padding-left: 8px;
+	height: 44px;
+	padding-top: 10px;
+}
+h5 a {
+	color: #E77323;
+	text-decoration: none;
+}
+
+.doc-cuerpo {
+	width: 890px;
+	background: #FFF;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 40px;
+	font: 11px Verdana, Arial, sans-serif;
+	color: #999;
+	margin-top: 20px;
+	position: relative;
+}
+.doc-cuerpo p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.doc-menu {
+	font-family: 'breeregular', Arial, sans-serif;
+	float: left;
+	width: 260px;
+	font-size: 17px;
+	color: #999;
+	line-height: 25px;
+}
+.doc-menu ul li a {
+	color: #999;
+	text-decoration: none;
+}
+.doc-menu ul li a:hover {
+	color: #e77425;
+	text-decoration: none;
+}
+li.selected {
+	color: #e77425;
+	text-decoration: none;
+}

@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SUSTENTATOR // ENERGIA - Contacto</title>
+<base href="http://sustentator.com/energia/">    
+<link href="scripts/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link href="scripts/contacto.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type='text/javascript' src='scripts/nivo.slider.pack.js'></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-8250873-11']);
+  _gaq.push(['_setDomainName', 'sustentator.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'http://www.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ </script>
+<script type="text/javascript">
+$(window).load(function() {
+	setTimeout(function(){
+	$('#slider').nivoslider({
+		effect:'fade', //Specify sets like: 'fold,fade,sliceDown'
+		slices:15,
+		animSpeed:500, //Slide transition speed
+		pauseTime:4000,
+		startSlide:0, //Set starting Slide (0 index)
+		directionNav:true, //Next & Prev
+		directionNavHide:true, //Only show on hover
+		controlNav:false, //1,2,3...
+		controlNavThumbs:true, //Use thumbnails for Control Nav
+        controlNavThumbsFromRel:false, //Use image rel for thumbs
+		controlNavThumbsSearch: '.jpg', //Replace this with...
+		controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
+		keyboardNav:true, //Use left & right arrows
+		pauseOnHover:true, //Stop animation while hovering
+		manualAdvance:false, //Force manual transitions
+		captionOpacity:0.8, //Universal caption opacity
+		beforeChange: function(){},
+		afterChange: function(){},
+		slideshowEnd: function(){} //Triggers after all slides have been shown
+	});
+	}, 1000);
+});
+</script>
+</head>
+<body>
+
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+</script>
+<!-- ClickTale end of Top part -->
+
+<div id="linea"></div><div class="clear"></div>
+<div class="all">
+<div id="main">
+  <div id="header">
+    <div id="botonera">
+      <ul>
+        <li><a href="quienes.html">QUIENES SOMOS</a></li>
+        <div class="break"></div>
+        <li><a href="servicios.html">PRODUCTOS</a></li>
+        <div class="break"></div>
+        <li><a href="certifica.html">CERTIFICACIONES</a></li>
+        <div class="break"></div>
+        <li><a href="doc.html">DOCUMENTACION</a></li>
+        <div class="break"></div>
+        <li class="current">CONTACTO</li>
+      </ul>
+    </div>
+    <a href="index.html" class="logo-energia"></a> </div>
+  <div id="cuerpo">
+    <div class="contacto">
+      <h1>TU CONSULTA NOS INTERESA. </h1>
+
+	  <p>Por favor completá el siguiente formulario. 
+        Te contestaremos lo antes posible.</p>
+	  <form name="contactform" method="post" action="scripts/form_test.php">
+	    <!--<div class="dato">Enviar Mail A:</div>
+        <input name="mail_to" type="text" value="energiasustentator@gmail.com" id="Nombre" required/ >-->
+        <div class="dato">Dirección de email</div><input name="email" type="text" id="Mail" required/ >
+		<div class="dato">Nombre</div><input name="first_name" type="text" id="Tel">
+        <div class="dato">Celular (opcional)</div><input name="telephone" type="text" id="Tel">
+		<div class="dato">Provincia</div>
+			<select name="provincia" id="Prov">	
+				<option value="NONE" selected>Seleccionar</option>
+				<option value="BsAs">Buenos Aires</option>
+				<option value="Catamarca">Catamarca</option>
+				<option value="Chaco">Chaco</option>
+				<option value="Chubut">Chubut</option>
+				<option value="CABA">Ciudad Autonoma de Bs. As.</option>
+				<option value="Cordoba">Córdoba</option>
+				<option value="Corrientes">Corrientes</option>
+				<option value="Entre Ríos">Entre Ríos</option>
+				<option value="Formosa">Formosa</option>
+				<option value="Jujuy">Jujuy</option>
+				<option value="La Pampa">La Pampa</option>
+				<option value="La Rioja">La Rioja</option>
+				<option value="Mendoza">Mendoza</option>
+				<option value="Misiones">Misiones</option>
+				<option value="Neuquen">Neuquén</option>
+				<option value="Río Negro">Río Negro</option>
+				<option value="Salta">Salta</option>
+				<option value="San Juan">San Juan</option>
+				<option value="San Luis">San Luis</option>
+				<option value="Santa Cruz">Santa Cruz</option>
+				<option value="Santa Fe">Santa Fe</option>
+				<option value="Santiago del E">Santiago del Estero</option>
+				<option value="T.d.F">Tierra del Fuego</option>
+				<option value="Tucuman">Tucumán</option>
+			</select>
+		<div class="dato">Energía que te interesa</div>
+			<select name="energia" id="Prov">	
+				<option value="Termica">Solar Térmica</option>
+				<option value="Fotovoltaica">Solar Fotovoltáica</option>
+				<option value="Eolica">Eolica</option>
+				<option value="Eficiencia">Eficiencia energetica</option>
+				<option value="Asesoramiento" selected>Todas / Asesoramiento</option>
+				<option value="Otra">Otra</option>
+			</select>
+        <div class="dato">Mensaje</div>
+        <textarea name="comments" cols="" rows="" id="Coment" required></textarea>
+        <input type="submit" value="ENVIAR" class="send">
+      </form>
+            <div class="interes">Consultas telefonicas: +54 11 4803-6961 <br/>
+	  Email: energia@sustentator.com
+	  </div>
+<!--
+	<p>Estimados Visitantes: lamtentablemnte por problemas en el servidor el formulario se encuentra momentaneamente desactivado</p></br>
+	<p>Por favor escribanos a la siguiente direccion de mail que les contestaremos a la brevedad:</p>
+	<a href="mailto:energia@sustentator.com?Subject=S//E-Consulta" target="_top">energia@sustentator.com</a></br>
+	<p></br>Consultas telefónicas: +54 11 4803-6961<p>
+-->	
+    </div>
+    <div class="puntitos"></div>
+    <div id="slider" class="nivoslider"> <img src="images/cont1.jpg" alt="1" title="#htmlcaption1"> </div>
+  </div>
+    <div id="thumbs-2">
+      <a href="servicios.html" class="boton-home"> <img src="images/foto-boton.jpg"> </a><div class="space-home"></div>
+    <a href="termica.html" class="boton-home">  <img src="images/term-boton.jpg">  </a><div class="space-home"></div>
+    <a href="eolica.html" class="boton-home">  <img src="images/eol-boton.jpg">  </a>    
+      
+      
+      </div>  
+    <div id="thumbs">
+        <a href="termotanque.html" class="blog">  
+        <div class="kit-txt shadoow">
+          <h1>TERMOTANQUE SOLAR</h1>
+          <p>Ahorre hasta el 80% de su consumo de gas con un termotanque solar para Agua Caliente Sanitaria (ACS)</p></div>
+          <div class="kit-img shadoow"></div>
+      </a>
+      <a href="http://sustentator.com/blog-es/energia/" class="blog" target="_blank">
+      <div class="blog-txt shadoow">Sustentator aumenta la conciencia ambiental y ofrece soluciones pragmáticas en el camino hacia la sustentabilidad.</div>
+      <div class="blog-img shadoow"></div>
+      </a> 
+        <a href="contact.html" class="contacto-home">  
+        <div class="cont-home-txt shadoow"></div>
+      </a>
+     </div>
+    
+    
+    
+    </div></div>
+<div class="clear"></div>
+<div id="footer">
+  <div id="feet">
+    <h2>Copyright © Sustentator Energia</h2>
+    <p>Sustentator energia by sustentator is licensed under a creative commons atribución-no comercial-licenciar igual 2.5 argentina license</p>
+    <h2>Powered by > <img src="images/sust.png" width="79" height="8" alt="sustentator"></h2>
+  </div>
+</div>
+
+<script type='text/javascript'>
+// The ClickTale Balkan Tracking Code may be programmatically customized using hooks:
+// 
+//   function ClickTalePreRecordingHook() { /* place your customized code here */  }
+//
+// For details about ClickTale hooks, please consult the wiki page http://wiki.clicktale.com/Article/Customizing_code_version_2
+
+document.write(unescape("%3Cscript%20src='"+
+(document.location.protocol=='https:'?
+"https://clicktalecdn.sslcs.cdngc.net/www02/ptc/7da4a4aa-2667-4cfa-b9fc-3c2251257114.js":
+"http://cdn.clicktale.net/www02/ptc/7da4a4aa-2667-4cfa-b9fc-3c2251257114.js")+"'%20type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

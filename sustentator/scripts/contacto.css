@@ -1,0 +1,144 @@
+.nivoSlider{position:relative;}
+.nivoSlider img{position:absolute;top:0;left:0;}
+.nivoSlider a.nivo-imageLink{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:60;display:none;margin:0;padding:0;}
+.nivo-slice{display:block;position:absolute;z-index:50;height:100%;}
+.nivo-html-caption{display:none;}
+.nivo-directionNav a{position:absolute;top:45%;z-index:99;cursor:pointer;}
+.nivo-prevNav{left:0;}
+.nivo-nextNav{right:0;}
+.nivo-controlNav a{position:relative;z-index:99;cursor:pointer;}
+.nivo-controlNav a.active{font-weight:700;}
+#slider{
+	position: relative;
+	min-height: 347px;
+	background: #202834 url(../images/loading.gif) no-repeat 50% 50%;
+	width: 573px;
+	float: right;
+}
+#slider img{position:absolute;top:0;left:0;display:none;}
+#slider a{border:0;display:block;}
+.nivo-controlNav{position:absolute;right:18px;bottom:18px;}
+.nivo-controlNav a{
+	display: block;
+	width: 15px;
+	height: 15px;
+	text-indent: -9999px;
+	border: 0;
+	margin-right: 10px;
+	float: left;
+	background-repeat: no-repeat;
+	background-image: url(../images/bullets.png);
+}
+.nivo-controlNav a.active{background-position:-15px 0;}
+.nivo-directionNav a{display:block;width:35px;height:34px;background:url(../images/arrows-n.png) no-repeat;text-indent:-9999px;border:0;}
+a.nivo-nextNav{background-position:-35px 0;right:-15px;}
+a.nivo-prevNav{left:-15px;}
+.nivo-caption a{text-decoration:underline;}
+* {margin:0;padding:0;}
+ol, ul {
+	list-style: none;
+}
+.contacto {
+	background-color: #F1F2F2;
+	width: 380px;
+	float: left;
+	height: 327px;
+	padding-left: 20px;
+	padding-right: 60px; 
+	padding-top: 10px; 
+	padding-bottom: 10px;
+	padding-right: 20px;   
+    color: #999;
+}
+.contacto p{
+	font-family: Verdana, Arial, sans-serif;
+	color: #666;
+	font-size: 11px;
+}
+.dato {
+	font-family: Verdana, Arial, sans-serif;
+	color: #666;
+	font-size: 10px;
+	float: left;
+	width: 150px;
+	height: 16px;
+	line-height: 15px;
+	margin-bottom: 7px;
+}
+.Ene {
+	font-family: Verdana, Arial, sans-serif;
+	color: #666;
+	font-size: 10px;
+	float: left;
+	width: 130px;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 7px;
+}
+.send {
+	line-height: 20px;
+	height: 20px;
+	width: 80px;
+	font-size: 11px;
+	background-color: #FFF;
+	float: right;
+	font-family: Verdana, Arial, sans-serif;
+	text-align: center;
+	border:none;
+    margin-right: 5px;
+}
+.interes {
+	font-family: Verdana, Arial, sans-serif;
+	color: #666;
+	font-size: 9px;
+	float: right;
+	width: 230px;
+	line-height: 13px;
+	text-align: justify;
+}
+textarea {
+	height: 70px;
+	resize: none;
+	outline: none;
+	width: 225px;
+	background-color: #CCC;
+	border: none;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	color: #666;
+	padding-left: 5px;
+	padding-top: 3px;
+}
+form {
+	margin-top: 10px;
+}
+#Nombre , #Mail, #Tel, input{
+	margin-bottom: 7px;
+	float: right;
+	background-color: #CCC;
+	width: 225px;
+	margin-bottom: 5px;
+	height: 20px;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	line-height: 15px;
+	color: #666;
+	padding-left: 5px;
+	border: none;
+	outline: none;
+}
+#Prov, #Ene{
+	margin-bottom: 7px;
+	float: right;
+	background-color: #CCC;
+	width: 230px;
+	margin-bottom: 5px;
+	height: 17px;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	line-height: 20px;
+	color: #666;
+	padding-left: 0px;
+	border: none;
+	outline: none;
+}
