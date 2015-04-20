@@ -93,6 +93,21 @@ $(window).load(function() {
     width: 100%;
     z-index: 1;
 }
+
+.flip-clock-dot.bottom {
+    bottom: 48px;
+}
+.flip-clock-dot {
+    background: none repeat scroll 0 0 #E37333;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: block;
+    height: 10px;
+    left: 5px;
+    position: absolute;
+    width: 10px;
+}
+
  </style>
 </head>
 <body>
@@ -113,11 +128,19 @@ $(window).load(function() {
                 // Calculate the difference in seconds between the future and current date
                 var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
 
-                // Instantiate a coutdown FlipClock
-                clock = $('.clock').FlipClock(100000090, {
+                // Instantiate a coutdown FlipClock 281774700
+                clock = $('.clock').FlipClock(10000000, {
                     clockFace: 'MoneyCounter',
-                    autoStart: true
+                    autoStart: true,
+                    incValue : 0.001672,
+                    initial: 1000000
                 });
+                
+                setTimeout(function() {
+                    setInterval(function() {
+                    clock.increment();
+                }, 1000);        
+                }); 
             });
         
 </script>

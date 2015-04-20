@@ -1997,6 +1997,7 @@ var FlipClock;
 		// autoStart: false,
 
 		minimumDigits: 2,
+		
 
 		/**
 		 * Constructor
@@ -2006,13 +2007,18 @@ var FlipClock;
 		 */
 		 
 		constructor: function(factory, options) {
+			initial = options.initial
 			//factory.timer.interval = 0;
 			factory.autoStart 	   = options.autoStart ? true : false;
 			//factory.running  	   = true;
 
 			factory.increment = function() {
 				factory.countdown = false;
-				factory.setTime(factory.getTime().getTimeSeconds() + 1);
+				initial = initial + options.incValue
+				console.log(initial);
+				console.log(options.incValue);
+				
+				factory.setTime(initial);
 			};
 
 			factory.decrement = function() {
@@ -2345,6 +2351,13 @@ var FlipClock;
 	});
 	
 }(jQuery));
+
+Number.prototype.toFixedDown = function(digits) {
+    var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
+        m = this.toString().match(re);
+    return m ? parseFloat(m[1]) : this.valueOf();
+};
+
 (function($) {
 
   /**
@@ -2372,12 +2385,22 @@ var FlipClock;
 
     constructor: function(factory, options) {
       //factory.timer.interval = 0;
+      initial = options.initial;
+      count = 0;
       factory.autoStart      = options.autoStart ? true : false;
       //factory.running      = true;
 
       factory.increment = function() {
         factory.countdown = false;
-        factory.setTime(factory.getTime().getTimeSeconds() + 1);
+        initial = initial + options.incValue
+        show_initial = initial.toFixedDown(4).toFixed(4);
+        count++;
+        console.log(count);
+        console.log(options.incValue)
+        console.log(initial);
+        console.log(show_initial);
+        
+        factory.setTime(show_initial);
       };
 
       factory.decrement = function() {
@@ -2427,7 +2450,7 @@ var FlipClock;
 
       this.factory.lists = lists;
       console.log(lists);
-      $(this.createDivider('', 'one-dot')).insertBefore(this.factory.lists[this.factory.lists.length - 8].$el);
+      $(this.createDivider('', 'one-dot')).insertBefore(this.factory.lists[this.factory.lists.length - 4].$el);
     },
 
     /**
