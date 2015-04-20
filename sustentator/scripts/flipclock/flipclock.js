@@ -2385,13 +2385,16 @@ Number.prototype.toFixedDown = function(digits) {
 
     constructor: function(factory, options) {
       //factory.timer.interval = 0;
-      initial = options.initial;
-      count = 0;
+      initial = factory.getTime().time;
+      
+    	//initial = options.initial;
+    	count = 0;
       factory.autoStart      = options.autoStart ? true : false;
       //factory.running      = true;
 
       factory.increment = function() {
         factory.countdown = false;
+        console.log(initial);
         initial = initial + options.incValue
         show_initial = initial.toFixedDown(4).toFixed(4);
         count++;
@@ -2431,7 +2434,7 @@ Number.prototype.toFixedDown = function(digits) {
       var children = this.factory.$el.find('ul');
       var lists    = [];
       var time   = this.factory.getTime().digitize([this.factory.getTime().time]);
-
+      console.log(this.factory.getTime());
       if(time.length > children.length) {
         $.each(time, function(i, digit) {
           var list = t.createList(digit, {
