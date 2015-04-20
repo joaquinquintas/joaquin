@@ -59,54 +59,29 @@ $(window).load(function() {
  
  <style>
  
- .flip-clock-wrapper ul {
-    background: none repeat scroll 0 0 #000;
+ #clock {
+     background: none repeat scroll 0 0 #000;
     border-radius: 6px;
-    float: left;
-    font-size: 8px !important;
     font-weight: bold;
     height: 45px;
     width: 30px;
-}
-
-.flip-clock-wrapper ul li a div div.inn {
+    border-radius: 6px;
+    color: #ccc;
+    font-size: 35px;
+    left: 0;
+    text-align: center;
+    text-shadow: 0 1px 2px #000;
+    width: 100%;
+    z-index: 1;
     background-color: #E37333;
     border-radius: 6px;
     color: #ccc;
     font-size: 35px;
     height: 200%;
     left: 0;
-    position: absolute;
     text-align: center;
     text-shadow: 0 1px 2px #000;
-    width: 100%;
-    z-index: 1;
-}
-
-.flip-clock-wrapper ul li {
-    height: 100%;
-    left: 0;
-    line-height: 43px;
-    position: absolute;
-    text-decoration: none !important;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-.flip-clock-dot.bottom {
-    bottom: 48px;
-}
-.flip-clock-dot {
-    background: none repeat scroll 0 0 #E37333;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    display: block;
-    height: 10px;
-    left: 5px;
-    position: absolute;
-    width: 10px;
-}
+ }
 
  </style>
 </head>
@@ -179,7 +154,7 @@ var WRInitTime=(new Date()).getTime();
       </div>
       
       <a href="index.html" class="logo-energia"></a> </div>
-      <p id="botonera" style="color:#E37333 !important;width: 573px;font-size: 23px">Kg. de Co2 evitados gracias a nuestras instalaciones</p>
+      <p id="botonera" style="color:#E37333 !important;width: 573px;font-size: 30px;margin-bottom: 30px">Kg. de Co2 evitados gracias a nuestras instalaciones</p>
       <p id="clock" class="clock flip-clock-wrapper" style=" margin-left:-3px;width: 400px !important; margin-bottom:30px"></p>
     <div id="cuerpo">
       <div class="puntitos"></div>
