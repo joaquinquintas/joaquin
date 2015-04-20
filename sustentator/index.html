@@ -13,7 +13,7 @@
 <script type='text/javascript' src='scripts/nivo.slider.pack.js'></script>
 
 <link href="scripts/flipclock/flipclock.css" rel="stylesheet" type="text/css">
-<script src="scripts/flipclock/flipclock.min.js"></script>
+<script src="scripts/flipclock/flipclock.js"></script>
 
 <script type="text/javascript">
 $(window).load(function() {
@@ -114,8 +114,8 @@ $(window).load(function() {
                 var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
 
                 // Instantiate a coutdown FlipClock
-                clock = $('.clock').FlipClock(1000000, {
-                    clockFace: 'Counter',
+                clock = $('.clock').FlipClock(100000090, {
+                    clockFace: 'MoneyCounter',
                     autoStart: true
                 });
             });
