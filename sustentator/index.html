@@ -5,15 +5,12 @@
 <title>SUSTENTATOR // ENERGIA</title>
 
 <!--  base href="http://sustentator.com/energia/" #E37333-->
- 
+ <link rel="stylesheet" type="text/css" href="scripts/counter/counter.css"/>
 <link href="scripts/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <link href="scripts/slide.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type='text/javascript' src='scripts/nivo.slider.pack.js'></script>
-
-<link href="scripts/flipclock/flipclock.css" rel="stylesheet" type="text/css">
-<script src="scripts/flipclock/flipclock.js"></script>
 
 <script type="text/javascript">
 $(window).load(function() {
@@ -57,28 +54,59 @@ $(window).load(function() {
   })();
  </script>
  
+   <!-- Counter script -->
+  <script type="text/javascript" src="scripts/counter/flipcounter.js"></script>
+  <script type="text/javascript" src="scripts/counter/modernizr.custom.21954.js"></script>
+  <!-- Counter styles -->
+  
+  
  <style>
  
+.flip-counter.small .digit span {
+    background-color: #e37333;
+
+}
+.flip-counter.small .digit-delimiter {
+    color: #e37333;
+}
+
+.flip-counter.small .digit .line {
+    border-bottom: 0px solid #959595;
+    box-shadow: 3px 5px 7px -4px #757595;
+}
+
+.CounterWrapper {
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+
+
+}
+
+.flip-counter {
+    list-style-type: none;
+    position: unset !important;
+}
+ #counter{
+    height: 100px;
+ }
  #clock {
-     background: none repeat scroll 0 0 #000;
+ font: normal 11px "Helvetica Neue", Helvetica, sans-serif;
+    background: none repeat scroll 0 0 #000;
     border-radius: 6px;
     font-weight: bold;
     height: 45px;
     width: 30px;
-    border-radius: 6px;
-    color: #ccc;
-    font-size: 35px;
-    left: 0;
     text-align: center;
     text-shadow: 0 1px 2px #000;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
     background-color: #E37333;
     border-radius: 6px;
-    color: #ccc;
+    color: #959595;
     font-size: 35px;
-    height: 200%;
-    left: 0;
+    margin-left:-3px;
+    width: 400px !important;
     text-align: center;
     text-shadow: 0 1px 2px #000;
  }
@@ -88,47 +116,68 @@ $(window).load(function() {
 <body>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
+		Number.prototype.toFixedDown = function(digits) {
+			var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"), m = this
+					.toString().match(re);
+			return m ? parseFloat(m[1]) : this.valueOf();
+		};
 
-            var clock;
+		var clock;
 
-            $(document).ready(function() {
+		$(document).ready(function() {
+			var initData = 0;
+			var velocidad = 0;
+			$.getJSON("data/instalaciones.json", function(data) {
+				console.log(data);
+				$.each(data, function(key, val) {
+					var currentDate = new Date();
+					seconds_current = currentDate.getTime() / 1000;
+					
+					console.log(val["Kps"]);
+					velocidad = velocidad + val["Kps"]
+					
+					InstalacionDate = new Date(val["dateTime"]);
+					seconds_old = InstalacionDate.getTime() / 1000;
+					console.log(seconds_old);
+					
+					var diff = seconds_current - seconds_old
+					
+					InstalationAhorro = diff * val["Kps"]
+					initData = initData + InstalationAhorro
+					
 
-                // Grab the current date
-                var currentDate = new Date();
+				});
+			    
+				console.log(initData);
+                console.log(velocidad);
+                 $("#myCounter").removeClass().addClass('flip-counter small');
+                var myCounter = new flipCounter('myCounter', {value: initData, inc: velocidad, pace: 1000, auto: true, decimals:4});
+			});
+		 
+			
+			/*
+			count = 0;
+			function increment() {
+				console.log(initData);
+				console.log(velocidad);
+				initData = initData + velocidad
+				show_initial = initData.toFixedDown(4).toFixed(4);
+				count++;
 
-                // Set some date in the future. In this case, it's always Jan 1
-                var futureDate  = new Date(currentDate.getFullYear() + 1, 0, 1);
+				$('#clock').html(show_initial);
+			}
+			;
 
-                // Calculate the difference in seconds between the future and current date
-                var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
-
-                // Instantiate a coutdown FlipClock 281774700
-                initial = 28177.47002
-                incValue =  0.001672
-                count = 0;
-                function increment(){
-	                console.log(initial);
-			        initial = initial + incValue
-			        show_initial = initial.toFixedDown(4).toFixed(4);
-			        count++;
-			        console.log(count);
-			        console.log(incValue)
-			        console.log(initial);
-			        console.log(show_initial);
-			        $('#clock').html( show_initial );
-                };
-               
-                
-                setTimeout(function() {
-                    setInterval(function() {
-                    increment();
-                }, 1000);        
-                }); 
-            });
-        
-</script>
-<!-- ClickTale Top part -->
+			setTimeout(function() {
+				setInterval(function() {
+					increment();
+				}, 1000);
+			});
+			*/
+		});
+	</script>
+	<!-- ClickTale Top part -->
 <script type="text/javascript">
 var WRInitTime=(new Date()).getTime();
 </script>
@@ -154,8 +203,16 @@ var WRInitTime=(new Date()).getTime();
       </div>
       
       <a href="index.html" class="logo-energia"></a> </div>
+      <!-- div id="counter">
       <p id="botonera" style="color:#E37333 !important;width: 573px;font-size: 30px;margin-bottom: 30px">Kg. de Co2 evitados gracias a nuestras instalaciones</p>
-      <p id="clock" class="clock flip-clock-wrapper" style=" margin-left:-3px;width: 400px !important; margin-bottom:30px"></p>
+      <p id="clock"></p>
+      </div-->
+      <div class="clearfix">
+		  <div class="CounterWrapper">
+		    <ul class="flip-counter default" id="myCounter"></ul>
+		    <div id="counterText" style="font-family:breeregular,Arial,sans-serif;color:#E37333 !important;width: 670px;font-size: 30px;margin-bottom: 30px">Kg. de <span style="font-weight:bold">Co2 evitados</span> gracias a nuestras instalaciones</div>
+		  </div>
+		</div>
     <div id="cuerpo">
       <div class="puntitos"></div>
       <div id="slider" class="nivoSlider"> <a href="termica.html"><img src="images/home1.jpg" alt="1" title="#htmlcaption1"></a> <a href="eolica.html"><img src="images/home3.jpg" alt="3" title="#htmlcaption3"></a> <a href="servicios.html"><img src="images/home2.jpg" alt="2" title="#htmlcaption2"></a> <a href="doc-energias.html"><img src="images/home4.jpg" alt="4" title="#htmlcaption4"></a> </div>
