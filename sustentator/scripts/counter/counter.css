@@ -97,11 +97,7 @@ p.info {
   left: -50%;
   margin-top: 20px;
 }
-.flip-counter {
-  position: relative;
-  left: 50%;
-  list-style-type: none;
-}
+
 .flip-counter li {
   float: right;
 }

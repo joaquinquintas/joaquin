@@ -5,7 +5,8 @@
 <title>SUSTENTATOR // ENERGIA</title>
 
 <!--  base href="http://sustentator.com/energia/" #E37333-->
- <link rel="stylesheet" type="text/css" href="scripts/counter/counter.css"/>
+<link rel="stylesheet" type="text/css"
+	href="scripts/counter/counter.css" />
 <link href="scripts/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <link href="scripts/slide.css" rel="stylesheet" type="text/css" />
@@ -53,70 +54,51 @@ $(window).load(function() {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
  </script>
- 
-   <!-- Counter script -->
-  <script type="text/javascript" src="scripts/counter/flipcounter.js"></script>
-  <script type="text/javascript" src="scripts/counter/modernizr.custom.21954.js"></script>
-  <!-- Counter styles -->
-  
-  
- <style>
- 
-.flip-counter.small .digit span {
-    background-color: #e37333;
 
+<!-- Counter script -->
+<script type="text/javascript" src="scripts/counter/flipcounter.js"></script>
+<script type="text/javascript"
+	src="scripts/counter/modernizr.custom.21954.js"></script>
+	
+<!-- Counter styles -->
+
+
+<style>
+.flip-counter.small .digit span {
+	background-color: #e37333;
 }
+
 .flip-counter.small .digit-delimiter {
-    color: #e37333;
+	color: #e37333;
 }
 
 .flip-counter.small .digit .line {
-    border-bottom: 0px solid #959595;
-    box-shadow: 3px 5px 7px -4px #757595;
+	border-bottom: 0px solid #959595;
+	box-shadow: 3px 5px 7px -4px #757595;
 }
 
 .CounterWrapper {
-    float: left;
-    width: 100%;
-    margin-bottom: 25px;
+	float: left;
+	width: 100%;
+	margin-bottom: 25px;
+}
 
-
+.CounterWrapper:hover {
+	cursor: pointer;
+	cursor: hand;
 }
 
 .flip-counter {
-    list-style-type: none;
-    position: unset !important;
+	list-style-type: none;
+	position: unset !important;
 }
- #counter{
-    height: 100px;
- }
- #clock {
- font: normal 11px "Helvetica Neue", Helvetica, sans-serif;
-    background: none repeat scroll 0 0 #000;
-    border-radius: 6px;
-    font-weight: bold;
-    height: 45px;
-    width: 30px;
-    text-align: center;
-    text-shadow: 0 1px 2px #000;
-    width: 100%;
-    z-index: 10;
-    background-color: #E37333;
-    border-radius: 6px;
-    color: #959595;
-    font-size: 35px;
-    margin-left:-3px;
-    width: 400px !important;
-    text-align: center;
-    text-shadow: 0 1px 2px #000;
- }
-
- </style>
+</style>
 </head>
 <body>
 
 
 	<script type="text/javascript">
+	
 		Number.prototype.toFixedDown = function(digits) {
 			var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"), m = this
 					.toString().match(re);
@@ -126,149 +108,162 @@ $(window).load(function() {
 		var clock;
 
 		$(document).ready(function() {
+			$(".CounterWrapper").hide();
+			$(".CounterWrapper").click(function()
+					{
+					    document.location.href = "instalaciones.html";
+					});
+			
 			var initData = 0;
 			var velocidad = 0;
 			$.getJSON("data/instalaciones.json", function(data) {
-				console.log(data);
+				
 				$.each(data, function(key, val) {
 					var currentDate = new Date();
-					seconds_current = currentDate.getTime() / 1000;
-					
-					console.log(val["Kps"]);
+
+					seconds_current =  currentDate.getTime() / 1000;
+
 					velocidad = velocidad + val["Kps"]
 					
-					InstalacionDate = new Date(val["dateTime"]);
+					var instDate = val["dateTime"].split(/[^0-9]/);
+					InstalacionDate = new Date (instDate[0],instDate[1]-1,instDate[2],instDate[3],instDate[4],instDate[5] );
 					seconds_old = InstalacionDate.getTime() / 1000;
-					console.log(seconds_old);
-					
+				
 					var diff = seconds_current - seconds_old
-					
+				    			
 					InstalationAhorro = diff * val["Kps"]
+
 					initData = initData + InstalationAhorro
 					
 
 				});
 			    
-				console.log(initData);
-                console.log(velocidad);
                  $("#myCounter").removeClass().addClass('flip-counter small');
                 var myCounter = new flipCounter('myCounter', {value: initData, inc: velocidad, pace: 1000, auto: true, decimals:4});
+                $(".CounterWrapper").show();
 			});
 		 
-			
-			/*
-			count = 0;
-			function increment() {
-				console.log(initData);
-				console.log(velocidad);
-				initData = initData + velocidad
-				show_initial = initData.toFixedDown(4).toFixed(4);
-				count++;
-
-				$('#clock').html(show_initial);
-			}
-			;
-
-			setTimeout(function() {
-				setInterval(function() {
-					increment();
-				}, 1000);
-			});
-			*/
 		});
 	</script>
 	<!-- ClickTale Top part -->
-<script type="text/javascript">
+	<script type="text/javascript">
 var WRInitTime=(new Date()).getTime();
 </script>
-<!-- ClickTale end of Top part -->
+	<!-- ClickTale end of Top part -->
 
-<div id="linea"></div>
-<div class="clear"></div>
-<div class="all">
-  <div id="main">
-    <div id="header">
-      <div id="botonera">
-        <ul>
-          <li><a href="quienes.html">QUIENES SOMOS</a></li>
-          <div class="break"></div>
-          <li><a href="servicios.html">PRODUCTOS</a></li>
-          <div class="break"></div>
-          <li><a href="instalaciones.html">INSTALACIONES</a></li>
-          <div class="break"></div>
-          <li><a href="doc.html">DOCUMENTACION</a></li>
-          <div class="break"></div>
-          <li><a href="contact.html">CONTACTO</a></li>
-        </ul>
-      </div>
-      
-      <a href="index.html" class="logo-energia"></a> </div>
-      <!-- div id="counter">
+	<div id="linea"></div>
+	<div class="clear"></div>
+	<div class="all">
+		<div id="main">
+			<div id="header">
+				<div id="botonera">
+					<ul>
+						<li><a href="quienes.html">QUIENES SOMOS</a></li>
+						<div class="break"></div>
+						<li><a href="servicios.html">PRODUCTOS</a></li>
+						<div class="break"></div>
+						<li><a href="instalaciones.html">INSTALACIONES</a></li>
+						<div class="break"></div>
+						<li><a href="doc.html">DOCUMENTACION</a></li>
+						<div class="break"></div>
+						<li><a href="contact.html">CONTACTO</a></li>
+					</ul>
+				</div>
+
+				<a href="index.html" class="logo-energia"></a>
+			</div>
+			<!-- div id="counter">
       <p id="botonera" style="color:#E37333 !important;width: 573px;font-size: 30px;margin-bottom: 30px">Kg. de Co2 evitados gracias a nuestras instalaciones</p>
       <p id="clock"></p>
       </div-->
-      <div class="clearfix">
-		  <div class="CounterWrapper">
-		    <ul class="flip-counter default" id="myCounter"></ul>
-		    <div id="counterText" style="font-family:breeregular,Arial,sans-serif;color:#E37333 !important;width: 670px;font-size: 30px;margin-bottom: 30px">Kg. de <span style="font-weight:bold">Co2 evitados</span> gracias a nuestras instalaciones</div>
-		  </div>
-		</div>
-    <div id="cuerpo">
-      <div class="puntitos"></div>
-      <div id="slider" class="nivoSlider"> <a href="termica.html"><img src="images/home1.jpg" alt="1" title="#htmlcaption1"></a> <a href="eolica.html"><img src="images/home3.jpg" alt="3" title="#htmlcaption3"></a> <a href="servicios.html"><img src="images/home2.jpg" alt="2" title="#htmlcaption2"></a> <a href="doc-energias.html"><img src="images/home4.jpg" alt="4" title="#htmlcaption4"></a> </div>
-      <div id="htmlcaption3" class="nivo-html-caption">
-        <p>EL VIENTO</p>
-        <p>COMO TU ALIADO</p>
-      </div>
-      <div id="htmlcaption4" class="nivo-html-caption">
-        <p>BENEFICIOS DE LAS</p>
-        <p>ENERGÍAS RENOVABLES</p>
-      </div>
-      <div id="htmlcaption1" class="nivo-html-caption">
-        <p>AHORRÁ HASTA</p>
-        <p>UN 80% DE ENERGÍA</p>
-      </div>
-      <div id="htmlcaption2" class="nivo-html-caption">
-        <p>GENERÁ TU PROPIA</p>
-        <p>ENERGÍA LIMPIA</p>
-      </div>
-    </div> 
-    <div id="thumbs-2">
-      <a href="servicios.html" class="boton-home"> <img src="images/foto-boton.jpg"> </a><div class="space-home"></div>
-    <a href="termica.html" class="boton-home">  <img src="images/term-boton.jpg">  </a><div class="space-home"></div>
-    <a href="eolica.html" class="boton-home">  <img src="images/eol-boton.jpg">  </a>    
-      
-      
-      </div>  
-    <div id="thumbs">
-        <a href="termotanque.html" class="blog">  
-        <div class="kit-txt shadoow">
-          <h1>TERMOTANQUE SOLAR</h1>
-          <p>Ahorre hasta el 80% de su consumo de gas con un termotanque solar para Agua Caliente Sanitaria (ACS)</p></div>
-          <div class="kit-img shadoow"></div>
-      </a>
-      <a href="http://sustentator.com/blog-es/" class="blog" target="_blank">
-      <div class="blog-txt shadoow">Sustentator aumenta la conciencia ambiental y ofrece soluciones pragmáticas en el camino hacia la sustentabilidad.</div>
-      <div class="blog-img shadoow"></div>
-      </a> 
-        <a href="contact.html" class="contacto-home">  
-        <div class="cont-home-txt shadoow"></div>
-      </a>
-     </div>
-  </div>
-</div>
-<div class="clear"></div>
-<div id="footer">
-  <div id="feet">
-    <h2>Copyright © Sustentator Energia    </h2>
-    <p>+54 11 4803-6961 energia@sustentator.com</p>
-    <h2>Powered by > <img src="images/sust.png" width="79" height="8" alt="sustentator"></h2>
-  </div>
-</div>
-  
-<!-- ClickTale Bottom part -->
+			<div class="clearfix">
+				<div class="CounterWrapper">
+					<ul class="flip-counter default" id="myCounter"></ul>
+					<div id="counterText"
+						style="font-family: breeregular, Arial, sans-serif; color: #E37333 !important; width: 670px; font-size: 28px; margin-bottom: 15px">
+						<span style="font-weight: bold">Kg.</span> de <span
+							style="font-weight: bold">Co2 evitados</span> gracias a nuestras
+						<span style="font-weight: bold">instalaciones</span>
+					</div>
+				</div>
+			</div>
+			<div id="cuerpo">
+				<div class="puntitos"></div>
+				<div id="slider" class="nivoSlider">
+					<a href="termica.html"><img src="images/home1.jpg" alt="1"
+						title="#htmlcaption1"></a> <a href="eolica.html"><img
+						src="images/home3.jpg" alt="3" title="#htmlcaption3"></a> <a
+						href="servicios.html"><img src="images/home2.jpg" alt="2"
+						title="#htmlcaption2"></a> <a href="doc-energias.html"><img
+						src="images/home4.jpg" alt="4" title="#htmlcaption4"></a>
+				</div>
+				<div id="htmlcaption3" class="nivo-html-caption">
+					<p>EL VIENTO</p>
+					<p>COMO TU ALIADO</p>
+				</div>
+				<div id="htmlcaption4" class="nivo-html-caption">
+					<p>BENEFICIOS DE LAS</p>
+					<p>ENERGÍAS RENOVABLES</p>
+				</div>
+				<div id="htmlcaption1" class="nivo-html-caption">
+					<p>AHORRÁ HASTA</p>
+					<p>UN 80% DE ENERGÍA</p>
+				</div>
+				<div id="htmlcaption2" class="nivo-html-caption">
+					<p>GENERÁ TU PROPIA</p>
+					<p>ENERGÍA LIMPIA</p>
+				</div>
+			</div>
+			<div id="thumbs-2">
+				<a href="servicios.html" class="boton-home"> <img
+					src="images/foto-boton.jpg">
+				</a>
+				<div class="space-home"></div>
+				<a href="termica.html" class="boton-home"> <img
+					src="images/term-boton.jpg">
+				</a>
+				<div class="space-home"></div>
+				<a href="eolica.html" class="boton-home"> <img
+					src="images/eol-boton.jpg">
+				</a>
 
-<script type='text/javascript'>
+
+			</div>
+			<div id="thumbs">
+				<a href="termotanque.html" class="blog">
+					<div class="kit-txt shadoow">
+						<h1>TERMOTANQUE SOLAR</h1>
+						<p>Ahorre hasta el 80% de su consumo de gas con un termotanque
+							solar para Agua Caliente Sanitaria (ACS)</p>
+					</div>
+					<div class="kit-img shadoow"></div>
+				</a> <a href="http://sustentator.com/blog-es/" class="blog"
+					target="_blank">
+					<div class="blog-txt shadoow">Sustentator aumenta la
+						conciencia ambiental y ofrece soluciones pragmáticas en el camino
+						hacia la sustentabilidad.</div>
+					<div class="blog-img shadoow"></div>
+				</a> <a href="contact.html" class="contacto-home">
+					<div class="cont-home-txt shadoow"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer">
+		<div id="feet">
+			<h2>Copyright © Sustentator Energia</h2>
+			<p>+54 11 4803-6961 energia@sustentator.com</p>
+			<h2>
+				Powered by > <img src="images/sust.png" width="79" height="8"
+					alt="sustentator">
+			</h2>
+		</div>
+	</div>
+
+	<!-- ClickTale Bottom part -->
+
+	<script type='text/javascript'>
 // The ClickTale Balkan Tracking Code may be programmatically customized using hooks:
 // 
 //   function ClickTalePreRecordingHook() { /* place your customized code here */  }
@@ -281,7 +276,7 @@ document.write(unescape("%3Cscript%20src='"+
 "http://cdn.clicktale.net/www02/ptc/7da4a4aa-2667-4cfa-b9fc-3c2251257114.js")+"'%20type='text/javascript'%3E%3C/script%3E"));
 </script>
 
-<!-- ClickTale end of Bottom part -->
+	<!-- ClickTale end of Bottom part -->
 
 
 </body>
