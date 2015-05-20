@@ -1,12 +1,17 @@
 
 
-from os import listdir, rename
+from os import listdir, rename, makedirs
 from os.path import isfile, join
 import Image
 
-
-if __name__ == "__main__":
-    mypath = "./clasicos/"
+def _generate_images(mypath):
+    process_path = mypath+"process/"
+    makedirs(process_path)
+    
+    for f in listdir(mypath):
+        im = Image.open(mypath+f)
+        im.save(process_path+f.split(".")[0] +".jpg", quality=90)
+        
     for f in listdir(mypath):
         print f
         if f == ".DS_Store":
@@ -20,7 +25,17 @@ if __name__ == "__main__":
         box = (left, top, left+width, top+height)
 
         crop = im.crop(box)
-        crop.save(mypath+f.split(".")[0]+"_crop", "jpeg")
+        crop.save(process_path+f.split(".")[0]+"_crop", "jpeg")
+
+
+if __name__ == "__main__":
+    clasicos = "./clasicos/"
+    contemporaneos = "./contemporaneos/"
+    etnicos = "./etnicos/"
+    organicos = "./organicos/"
+    small_patterns = "./clasicos/"
+    _generate_images()
+
 
 
 if __name__ == "__main__1":
