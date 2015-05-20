@@ -1,40 +1,52 @@
 
 
 from os import listdir, rename, makedirs
-from os.path import isfile, join
+from os.path import isfile, join, exists
 import Image
 
 def _generate_images(mypath):
     process_path = mypath+"process/"
-    makedirs(process_path)
+    if not exists(process_path):
+        makedirs(process_path)
     
+    print mypath
     for f in listdir(mypath):
-        im = Image.open(mypath+f)
-        im.save(process_path+f.split(".")[0] +".jpg", quality=90)
+        print f
+        if f == ".DS_Store":
+            continue
+        if isfile(mypath+f):
+            im = Image.open(mypath+f)
+            im.save(process_path+f.split(".")[0] +".jpg", quality=90)
         
     for f in listdir(mypath):
         print f
         if f == ".DS_Store":
             continue
-        im = Image.open(mypath+f)
-        width, height = im.size   # Get dimensions
-        new_height = 166
-        left = 0
-        top = 415
-        height = 166
-        box = (left, top, left+width, top+height)
-
-        crop = im.crop(box)
-        crop.save(process_path+f.split(".")[0]+"_crop", "jpeg")
+        if isfile(mypath+f):
+                
+            im = Image.open(mypath+f)
+            width, height = im.size   # Get dimensions
+            new_height = 166
+            left = 0
+            top = 415
+            height = 166
+            box = (left, top, left+width, top+height)
+    
+            crop = im.crop(box)
+            crop.save(process_path+f.split(".")[0]+"_crop.jpg", "jpeg")
 
 
 if __name__ == "__main__":
-    clasicos = "./clasicos/"
-    contemporaneos = "./contemporaneos/"
-    etnicos = "./etnicos/"
-    organicos = "./organicos/"
-    small_patterns = "./clasicos/"
-    _generate_images()
+    clasicos = "clasicos/"
+    contemporaneos = "contemporaneos/"
+    etnicos = "etnicos/"
+    organicos = "organicos/"
+    small_patterns = "small_patterns/"
+    _generate_images(clasicos)
+    _generate_images(contemporaneos)
+    _generate_images(etnicos)
+    _generate_images(organicos)
+    _generate_images(small_patterns)
 
 
 
