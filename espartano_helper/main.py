@@ -4,6 +4,13 @@ from os import listdir, rename, makedirs
 from os.path import isfile, join, exists
 import Image
 
+"""
+Generar INSERT
+
+db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_crop, posicion, compatibles) VALUES ('2A',1,'B7807B,','classic_2a', '_2a_crop', 2,'classic_2c')");
+
+"""
+
 def _generate_images(mypath):
     process_path = mypath+"process/"
     if not exists(process_path):
