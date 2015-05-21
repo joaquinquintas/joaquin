@@ -13,18 +13,27 @@ db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_
 import csv
 
 
-def _colores_transformation(color_dict):
+
+def _colores_transformation():
+    color_dict = _merge_colores()
+    #print color_dict
     f = open("compatibles/colores.csv", 'rU')
     csv_f = csv.reader(f, dialect=csv.excel_tab)
 
     r_dict = {}
+    count = 0
     for row in csv_f:
         row = row[0].split(",")
         trans = []
         for c in row[1:]:
-            trans.append(color_dict[c])
-        r_dict[row[0].lower()] = ",".joint(trans)
-        
+            try:
+                trans.append(color_dict[c])
+            except:
+                count = count +1
+                print c
+        r_dict[row[0].lower()] = ",".join(trans)
+    
+    print count
     return r_dict
 
 def _get_color_code(mypath):
@@ -60,7 +69,7 @@ def _get_compatible(mypath):
     r_dict = {}
     for row in csv_f:
         row = row[0].split(",")
-        r_dict[row[0].lower()] = ",".joint(row[1:])
+        r_dict[row[0].lower()] = ",".join(row[1:])
         
     return r_dict
 
@@ -69,7 +78,7 @@ def _merge_compatible():
     d2 =  _get_compatible('compatibles/contemporaneos.csv')
     d3 =  _get_compatible('compatibles/etnicos.csv')
     d4 =  _get_compatible('compatibles/organicos.csv')
-    d5 =  _get_compatible('compatibles/small_partterns.csv')
+    d5 =  _get_compatible('compatibles/small_patterns.csv')
     
     compa_dict = d1.copy()
     compa_dict.update(d2)
@@ -79,29 +88,42 @@ def _merge_compatible():
     
     return compa_dict
     
-                      
-def _generate_images(mypath, collection, r_dict, compa_dict):
+
+no_colores = []
+no_compatibles = []
+                  
+def _generate_images(mypath, collection,  compa_dict, colores):
     process_path = mypath+"process/"
     if not exists(process_path):
         makedirs(process_path)
     
     count = 0
     for f in listdir(mypath):
-        print f
+        
         if f == ".DS_Store":
             continue
         if isfile(mypath+f):
             im = Image.open(mypath+f)
-            name = process_path+f.split(".")[0] 
+            name = f.split(".")[0] 
             name_crop = name+ "_crop"
-            im.save(name+".jpg", quality=90)
+            im.save( process_path+name+".jpg", quality=87)
             count = count + 1
-            colores = r_dict[name.lower()]
-            compatibles = compa_dict[name.lower()]
-            print 'db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_crop, posicion, compatibles) VALUES (' + "'" +name + "'," + "'" +collection + "'," + "'" +colores + "'," + "'" +name + "'," + "'" +name_crop + "'," + str(count) + "'" +compatibles +')");'
+            
+            try:
+                colores_ = colores[name.lower()]
+            except:
+                no_colores.append(name)
+                colores_ = ""
+            
+            try:
+                compatibles = compa_dict[name.lower()]
+            except:
+                compatibles= ""
+                no_compatibles.append(name)
+                
+            print 'db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_crop, posicion, compatibles) VALUES (' + "'" +name + "'," + "'" +collection + "'," + "'" +colores_ + "'," + "'" +name + "'," + "'" +name_crop + "'," + str(count) + "'," +compatibles +')");'
         
     for f in listdir(mypath):
-        print f
         if f == ".DS_Store":
             continue
         if isfile(mypath+f):
@@ -115,7 +137,7 @@ def _generate_images(mypath, collection, r_dict, compa_dict):
             box = (left, top, left+width, top+height)
     
             crop = im.crop(box)
-            crop.save(process_path+f.split(".")[0]+"_crop.jpg", "jpeg")
+            crop.save(process_path+f.split(".")[0]+"_crop.jpg", "jpeg", quality=87)
 
 
 if __name__ == "__main__":
@@ -125,12 +147,27 @@ if __name__ == "__main__":
     organicos = "organicos/"
     small_patterns = "small_patterns/"
     compatibles = _merge_compatible()
-    _generate_images(clasicos, "1",compatibles)
-    _generate_images(contemporaneos, "2",compatibles)
-    _generate_images(etnicos, "3",compatibles)
-    _generate_images(organicos, "4", compatibles)
-    _generate_images(small_patterns, "5", compatibles)
-
+    #print compatibles
+    colores = _colores_transformation()
+    #print colores
+    _generate_images(clasicos, "1",compatibles,colores)
+    _generate_images(contemporaneos, "2",compatibles,colores)
+    _generate_images(etnicos, "3",compatibles,colores)
+    _generate_images(organicos, "4", compatibles,colores)
+    _generate_images(small_patterns, "5", compatibles,colores)
+    
+    print ""
+    print "-------"
+    print ""
+    print "Texturas sin colores en la planilla"
+    print ""
+    print no_colores
+    print ""
+    print "-------"
+    print "Texturas sin compatibles en la planilla"
+    print ""
+    print no_compatibles 
+    print ""
 
 
 if __name__ == "__main__1":
