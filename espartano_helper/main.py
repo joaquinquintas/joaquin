@@ -93,7 +93,7 @@ no_colores = []
 no_compatibles = []
                   
 def _generate_images(mypath, collection,  compa_dict, colores):
-    process_path = mypath+"process/"
+    process_path = "process/"
     if not exists(process_path):
         makedirs(process_path)
     
@@ -106,7 +106,7 @@ def _generate_images(mypath, collection,  compa_dict, colores):
             im = Image.open(mypath+f)
             name = f.split(".")[0] 
             name_crop = name+ "_crop"
-            im.save( process_path+name+".jpg", quality=87)
+            im.save( process_path+name.lower()+".jpg", quality=87)
             count = count + 1
             
             try:
@@ -121,7 +121,7 @@ def _generate_images(mypath, collection,  compa_dict, colores):
                 compatibles= ""
                 no_compatibles.append(name)
                 
-            print 'db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_crop, posicion, compatibles) VALUES (' + "'" +name + "'," + "'" +collection + "'," + "'" +colores_ + "'," + "'" +name + "'," + "'" +name_crop + "'," + str(count) + "'," +compatibles +')");'
+            print 'db.execSQL("insert into Texturas (codigo, id_coleccion, colores, imagen, imagen_crop, posicion, compatibles) VALUES (' + "'" +name + "'," + "'" +collection + "'," + "'" +colores_ + "'," + "'" +name.lower() + "'," + "'" +name_crop.lower() + "'," + str(count) + ",'" +compatibles +"'"+')");'
         
     for f in listdir(mypath):
         if f == ".DS_Store":
@@ -137,7 +137,7 @@ def _generate_images(mypath, collection,  compa_dict, colores):
             box = (left, top, left+width, top+height)
     
             crop = im.crop(box)
-            crop.save(process_path+f.split(".")[0]+"_crop.jpg", "jpeg", quality=87)
+            crop.save(process_path+f.split(".")[0].lower()+"_crop.jpg", "jpeg", quality=87)
 
 
 if __name__ == "__main__":
