@@ -59,7 +59,7 @@ def _load_colores_from_file():
         print 'db.execSQL("insert into Colores (id, color, pos, grupo) VALUES (' + "'" +row[1] + "'," + "'" +row[0] + "'," + str(count)+  ', 4)");'
         count = count + 1
         
-def _merge_colores(mypath):
+def _merge_colores_html(mypath):
     c1,d1 =  _get_color_code('colores/bandeja1.csv')
     c2,d2 =  _get_color_code('colores/bandeja2.csv')
     c3,d3 =  _get_color_code('colores/bandeja3.csv')
@@ -76,6 +76,23 @@ def _merge_colores(mypath):
     count_erros= 0
     count = 0 
     aux_pos = 1
+    print "<html>"
+    print "<head>"
+    print "<style>"
+    print ".square {"
+    print "background-color: #000;"
+    print "display: inline-block;"
+    print "height: 150px;"
+    print "vertical-align: top;"
+    print "width: 150px;"
+    print "*display: inline;"
+    print "zoom: 1;"
+    print "margin: 5px;"
+    print "}"
+    print "</style>"
+    print "</head>"
+    print "<body>"
+    print '<div id="squares">'
     for row in csv_f:
         #print row
         row = row[0].split(",")
@@ -93,10 +110,41 @@ def _merge_colores(mypath):
                 color = color_code
             else:
                 color = color_dict[color_code]
-            print 'db.execSQL("insert into Colores (id, color, pos, grupo) VALUES (' + "'" +color_code+ "'," + "'" +color+ "'," + str(count)+  ',' +str(pos)+')");'
+            #print color + "," + color_code
+            print '<div id="2" class="square" style="background-color:#'+color+'"><span style="margin: 40px;">'+ color_code+'</span><br/><span style="margin: 40px;">'+ color+'</span></div>'
+            #print 'db.execSQL("insert into Colores (id, color, pos, grupo) VALUES (' + "'" +color_code+ "'," + "'" +color+ "'," + str(count)+  ',' +str(pos)+')");'
     
-    print count_erros
-            
+    print '</div>'
+    print "</body>"
+    print "</html>"
+
+def _merge_colores(mypath):
+
+    
+    colores_file = open(mypath, 'rU')
+    csv_f = csv.reader(colores_file, dialect=csv.excel_tab)
+    count_erros= 0
+    count = 0 
+    aux_pos = 1
+
+    for row in csv_f:
+        #print row
+        row = row[0].split(",")
+        #print row
+        cromaton = row[0]
+        panton = row[1]
+        pos = int(row[2])
+        
+        if aux_pos != int(pos):
+            count = 0
+            aux_pos = int(pos)
+        
+        count = count + 1
+
+        print 'db.execSQL("insert into Colores (id, color, pos, grupo) VALUES (' + "'" +cromaton+ "'," + "'" +panton+ "'," + str(count)+  ',' +str(pos)+')");'
+
+                     
+                     
     
 if __name__ == "__main__":        
     #tmp = 'db.execSQL(insert into Colores (id, color, order, set) VALUES (' + "'" + "%s","%s",%s,%s)");'
